@@ -79,3 +79,5 @@ Buka laman `http://127.0.0.1:8000/` di browser Anda.
 
 [RasyaJusticio](https://github.com/RasyaJusticio) - Semua
 [vanDunviel](https://github.com/vanDunviel) - Produk & Kategory
+[Waifull](https://github.com/Waifull) - [UI](https://github.com/Waifull/kasir-usk)
+[Riskyy-06](https://github.com/Riskyy-06) - [Modifier UI](https://github.com/Riskyy-06/kasir-usk)
