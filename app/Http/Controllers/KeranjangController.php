@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ItemKeranjang;
+use App\Models\ItemTransaksi;
 use App\Models\Produk;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
@@ -26,7 +28,34 @@ class KeranjangController extends Controller
         ]);
     }
 
-    public function checkout() {}
+    public function checkout()
+    {
+        $items = ItemKeranjang::with('produk')->get()->map(function ($item) {
+            $item->total_harga = $item->produk->harga * $item->jumlah;
+            return $item;
+        });
+
+        $transaksi = Transaksi::create([
+            'total_harga' => $items->sum('total_harga'),
+        ]);
+
+        foreach ($items as $item) {
+            ItemTransaksi::create([
+                'transaksi_id' => $transaksi->id,
+                'produk_id' => $item->produk_id,
+                'jumlah' => $item->jumlah,
+                'total_harga' => $item->total_harga,
+            ]);
+
+            $item->produk()->update([
+                'kuantitas' => $item->produk->kuantitas - $item->jumlah,
+            ]);
+        }
+
+        ItemKeranjang::truncate();
+
+        return redirect()->route('transaksi.show', $transaksi)->with('success', 'Transaksi berhasil dilakukan.');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -75,30 +104,6 @@ class KeranjangController extends Controller
 
         ItemKeranjang::create($validated);
         return redirect()->route('keranjang.index')->with('success', 'Produk berhasil dimasukkan.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**

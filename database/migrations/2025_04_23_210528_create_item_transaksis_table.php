@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('item_transaksis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaksi_id')->constrained('transaksis')->cascadeOnDelete();
-            $table->foreignId('produk_id')->constrained('produks')->nullOnDelete();
+            $table->foreignId('produk_id')->constrained('produks')->cascadeOnDelete();
             $table->integer('jumlah');
             $table->integer('total_harga');
             $table->timestamps();
