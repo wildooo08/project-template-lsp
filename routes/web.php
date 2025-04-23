@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
     Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::get('/keranjang/create', [KeranjangController::class, 'create'])->name('keranjang.create');
+    Route::get('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('keranjang.checkout');
 });
 
 require __DIR__ . '/auth.php';
