@@ -114,7 +114,8 @@
                     </p>
 
                     <form action="{{ route('keranjang.checkout') }}" method="POST">
-                        <button type="button"
+                        @csrf
+                        <button type="submit"
                             class="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold">Bayar</button>
                     </form>
                 </div>
