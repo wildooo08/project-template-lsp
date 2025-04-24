@@ -78,6 +78,21 @@
                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
                                             </a>
+
+                                            <form action="{{ route('transaksi.destroy', $transaksi) }}" method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onclick="openDeleteModal({{ $transaksi->id }})"
+                                                    class="text-red-600 hover:text-red-900" title="Hapus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M19 7L5 7M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12M10 11v6M14 11v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3" />
+                                                    </svg>
+                                                </button>
+                                            </form>
                                         </td>
 
                                     </tr>
@@ -101,7 +116,7 @@
     <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-sm w-full p-6">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Konfirmasi Hapus</h3>
-            <p class="mb-6 text-gray-700 dark:text-gray-300">Apakah Anda yakin ingin menghapus produk ini?</p>
+            <p class="mb-6 text-gray-700 dark:text-gray-300">Apakah Anda yakin ingin menghapus transaksi ini?</p>
 
             <form id="deleteForm" method="POST" action="">
                 @csrf
@@ -122,10 +137,10 @@
 
     {{-- Script JavaScript --}}
     <script>
-        function openDeleteModal(produkId) {
+        function openDeleteModal(transaksiId) {
             const modal = document.getElementById('deleteModal');
             const form = document.getElementById('deleteForm');
-            form.action = `/produk/${produkId}`;
+            form.action = `/transaksi/${transaksiId}`;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
