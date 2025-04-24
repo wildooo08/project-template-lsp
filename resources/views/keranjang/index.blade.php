@@ -59,13 +59,13 @@
                                         {{ $item->produk->nama_produk }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                        {{ $item->produk->harga }}
+                                        Rp {{ number_format($item->produk->harga, 0, ',', '.') }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                         {{ $item->jumlah }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                        {{ $item->total_harga }}
+                                        Rp {{ number_format($item->total_harga, 0, ',', '.') }}
                                     </td>
                                     <td
                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 flex items-center space-x-3">
@@ -110,13 +110,19 @@
                 <div
                     class="bg-neutral-200 dark:bg-gray-800 overflow-hidden shadow-lg sm:rounded-lg flex flex-col gap-4 h-full w-full md:w-[35%] p-4 border border-gray-200 dark:border-gray-700">
                     <p class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-loose text-nowrap">
-                        Total Harga: {{ $total_belanja }}
+                        Total Harga: Rp {{ number_format($total_belanja, 0, ',', '.') }}
                     </p>
 
                     <form action="{{ route('keranjang.checkout') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold">Bayar</button>
+                            class="px-4 py-2 rounded font-semibold text-white {{ count($items) === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700' }}"
+                            {{ count($items) === 0 ? 'disabled' : '' }}>
+                            Bayar
+                        </button>
+                        @if(count($items) === 0)
+                            <p class="text-sm text-red-500 mt-2">Keranjang anda masih kosong!</p>
+                        @endif
                     </form>
                 </div>
             </div>

@@ -35,6 +35,10 @@ class KeranjangController extends Controller
             return $item;
         });
 
+        if ($items->isEmpty()) {
+            return redirect()->route('keranjang.index')->with('error', 'Keranjang masih kosong.');
+        }    
+
         $transaksi = Transaksi::create([
             'total_harga' => $items->sum('total_harga'),
         ]);
