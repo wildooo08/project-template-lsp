@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
     Route::get('/keranjang/create', [KeranjangController::class, 'create'])->name('keranjang.create');
+    Route::post('/keranjang', [KeranjangController::class, 'store'])->name('keranjang.store');
     Route::get('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('keranjang.checkout');
+    Route::delete('/keranjang/{item}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 });
 
 require __DIR__ . '/auth.php';
