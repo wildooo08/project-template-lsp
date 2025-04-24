@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
