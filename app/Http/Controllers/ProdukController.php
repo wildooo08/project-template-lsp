@@ -13,7 +13,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produks = Produk::with('kategori')->get();
+        $produks = Produk::with('kategori')->paginate(10);
         return view('produk.index', compact('produks'));
     }
 
@@ -23,7 +23,7 @@ class ProdukController extends Controller
     public function create()
     {
         $kategoris = Kategori::all(['id', 'nama_kategori']);
-        return view('produk.form', compact('kategoris'));
+        return view('produk.create', compact('kategoris'));
     }
 
     /**
@@ -36,10 +36,17 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'kuantitas' => 'required|integer|min:0',
             'harga' => 'required|integer|min:0',
+        ], [
+            'nama_produk.required' => 'Nama produk harus diisi.',
+            'kategori_id.required' => 'Kategori produk harus dipilih.',
+            'kuantitas.required' => 'Kuantitas produk harus diisi.',
+            'harga.required' => 'Harga produk harus diisi.',
+            'kuantitas.min' => 'Kuantitas produk tidak boleh kurang dari 0.',
+            'harga.min' => 'Harga produk tidak boleh kurang dari 0.',
         ]);
 
-        $produk = Produk::create($validated);
-        return redirect()->route('produk.index');
+        Produk::create($validated);
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -59,7 +66,7 @@ class ProdukController extends Controller
         $produk->load('kategori');
         $kategoris = Kategori::all(['id', 'nama_kategori']);
 
-        return view('produk.form', compact('produk', 'kategoris'));
+        return view('produk.edit', compact('produk', 'kategoris'));
     }
 
     /**
@@ -72,10 +79,16 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'kuantitas' => 'required|integer',
             'harga' => 'required|integer|min:0',
+        ], [
+            'nama_produk.required' => 'Nama produk harus diisi.',
+            'kategori_id.required' => 'Kategori produk harus dipilih.',
+            'kuantitas.required' => 'Kuantitas produk harus diisi.',
+            'harga.required' => 'Harga produk harus diisi.',
+            'harga.min' => 'Harga produk tidak boleh kurang dari 0.',
         ]);
 
         $produk->update($validated);
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +97,6 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         $produk->delete();
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 }
