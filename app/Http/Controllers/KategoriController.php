@@ -34,7 +34,7 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create($validated);
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -63,7 +63,7 @@ class KategoriController extends Controller
         ]);
 
         $kategori->update($validated);
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
