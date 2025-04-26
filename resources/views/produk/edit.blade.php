@@ -6,60 +6,56 @@
     </x-slot>
     <div class="py-12 max-w-lg mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <form action="{{ route('produk.update', $produk) }}" method="POST">
+            <form action="{{ route('produk.update', $item) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-4">
-                    <label for="nama_produk" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
-                        Produk</label>
-                    <input type="text" name="nama_produk" id="nama_produk" required autofocus
-                        value="{{ old('nama_produk', $produk->nama_produk) }}"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('nama_produk') border-red-500 @enderror">
-                    @error('nama_produk')
+                    <label for="name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama</label>
+                    <input type="text" name="name" id="name" autofocus value="{{ old('name', $item->name) }}"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('name') border-red-500 @enderror">
+                    @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="kategori_id"
+                    <label for="category_id"
                         class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Kategori</label>
-                    <select name="kategori_id" id="kategori_id" required
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('kategori_id') border-red-500 @enderror">
+                    <select name="category_id" id="category_id"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('category_id') border-red-500 @enderror">
                         <option value="">Pilih Kategori</option>
-                        @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}"
-                                {{ old('kategori_id', $produk->kategori_id) == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->nama_kategori }}
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id', $item->category_id) == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
                             </option>
                         @endforeach
                     </select>
-                    @error('kategori_id')
+                    @error('category_id')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="harga"
+                    <label for="price"
                         class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Harga</label>
-                    <input type="text" name="harga" id="harga" required
-                        value="{{ old('harga', $produk->harga) }}"
-                        placeholder="Masukkan harga (contoh: 15000 atau 15000.50)"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('harga') border-red-500 @enderror"
+                    <input type="text" name="price" id="price" value="{{ old('price', $item->price) }}"
+                        placeholder="Masukkan harga (contoh: 15000)"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('price') border-red-500 @enderror"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
-                    @error('harga')
+                    @error('price')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="kuantitas"
-                        class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Stok</label>
-                    <input type="text" name="kuantitas" id="kuantitas" required
-                        value="{{ old('kuantitas', $produk->kuantitas) }}" placeholder="Masukkan jumlah stok"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('kuantitas') border-red-500 @enderror"
+                    <label for="stock" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Stok</label>
+                    <input type="text" name="stock" id="stock" value="{{ old('stock', $item->stock) }}"
+                        placeholder="Masukkan jumlah stok"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('stock') border-red-500 @enderror"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-                    @error('kuantitas')
+                    @error('stock')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>

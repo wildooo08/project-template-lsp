@@ -45,11 +45,11 @@
                                     </th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Kuantitas
+                                        Harga
                                     </th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Harga
+                                        Stok
                                     </th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -58,29 +58,29 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                @forelse ($produks as $produk)
+                                @forelse ($items as $item)
                                     <tr>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                            {{ $produk->nama_produk }}
+                                            {{ $item->name }}
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                            {{ $produk->kategori->nama_kategori }}
+                                            {{ $item->category->name }}
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                            {{ $produk->kuantitas }}
+                                            Rp {{ number_format($item->price, 0, ',', '.') }}
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                            Rp {{ number_format($produk->harga, 0, ',', '.') }}
+                                            {{ $item->stock }}
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 flex items-center space-x-3">
 
                                             <!-- Icon Edit (Pencil icon) -->
-                                            <a href="{{ route('produk.edit', $produk) }}"
+                                            <a href="{{ route('produk.edit', $item) }}"
                                                 class="text-indigo-700 hover:text-indigo-900" title="Edit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -90,11 +90,11 @@
                                             </a>
 
                                             <!-- Icon Hapus (Trash icon) -->
-                                            <form action="{{ route('produk.destroy', $produk) }}" method="POST"
+                                            <form action="{{ route('produk.destroy', $item) }}" method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="openDeleteModal({{ $produk->id }})"
+                                                <button type="button" onclick="openDeleteModal({{ $item->id }})"
                                                     class="text-red-600 hover:text-red-900" title="Hapus">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -119,7 +119,7 @@
                         </table>
                     </div>
 
-                    {{ $produks->links() }}
+                    {{ $items->links() }}
                 </div>
             </div>
         </div>

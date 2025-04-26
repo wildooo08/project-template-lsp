@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProfileController;
@@ -24,12 +25,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-    Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
-    Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
-    Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
-    Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
-    Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+    Route::get('/produk', [ItemController::class, 'index'])->name('produk.index');
+    Route::get('/produk/create', [ItemController::class, 'create'])->name('produk.create');
+    Route::post('/produk', [ItemController::class, 'store'])->name('produk.store');
+    Route::get('/produk/{item}/edit', [ItemController::class, 'edit'])->name('produk.edit');
+    Route::put('/produk/{item}', [ItemController::class, 'update'])->name('produk.update');
+    Route::delete('/produk/{item}', [ItemController::class, 'destroy'])->name('produk.destroy');
 
     Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori.index');
     Route::get('/kategori/create', [CategoryController::class, 'create'])->name('kategori.create');
