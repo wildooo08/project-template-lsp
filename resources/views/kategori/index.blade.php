@@ -46,17 +46,17 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                @forelse ($categories as $category)
+                                @forelse ($kategoris as $kategori)
                                     <tr>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                            {{ $category->name }}
+                                            {{ $kategori->nama_kategori }}
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 flex items-center space-x-3">
 
                                             <!-- Icon Edit (Pencil icon) -->
-                                            <a href="{{ route('kategori.edit', $category) }}"
+                                            <a href="{{ route('kategori.edit', $kategori) }}"
                                                 class="text-indigo-700 hover:text-indigo-900" title="Edit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -66,11 +66,11 @@
                                             </a>
 
                                             <!-- Icon Hapus (Trash icon) -->
-                                            <form action="{{ route('kategori.destroy', $category) }}" method="POST"
+                                            <form action="{{ route('kategori.destroy', $kategori) }}" method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="openDeleteModal({{ $category->id }})"
+                                                <button type="button" onclick="openDeleteModal({{ $kategori->id }})"
                                                     class="text-red-600 hover:text-red-900" title="Hapus">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -95,7 +95,7 @@
                         </table>
                     </div>
 
-                    {{ $categories->links() }}
+                    {{ $kategoris->links() }}
                 </div>
             </div>
         </div>

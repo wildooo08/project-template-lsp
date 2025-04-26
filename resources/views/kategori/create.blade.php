@@ -10,11 +10,12 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
+                    <label for="nama_kategori" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
                         Kategori</label>
-                    <input type="text" name="name" id="name" autofocus value="{{ old('name') }}"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('name') border-red-500 @enderror">
-                    @error('name')
+                    <input type="text" name="nama_kategori" id="nama_kategori" autofocus
+                        value="{{ old('nama_kategori') }}"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('nama_kategori') border-red-500 @enderror">
+                    @error('nama_kategori')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
