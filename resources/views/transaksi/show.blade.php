@@ -69,6 +69,20 @@
                             Rp {{ number_format($transaksi->total_harga, 0, ',', '.') }}
                         </td>
                     </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                            Total Bayar
+                        </td>
+                        <td class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                            -
+                        </td>
+                        <td class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                            -
+                        </td>
+                        <td class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                            Rp {{ number_format($transaksi->total_bayar, 0, ',', '.') }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

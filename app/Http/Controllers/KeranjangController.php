@@ -28,8 +28,12 @@ class KeranjangController extends Controller
         ]);
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
+        $validated = $request->validate([
+            'pay_total' => 'required|numeric|min:0',
+        ]);
+
         $items = ItemKeranjang::with('produk')->get()->map(function ($item) {
             $item->total_harga = $item->produk->harga * $item->jumlah;
             return $item;
@@ -37,10 +41,15 @@ class KeranjangController extends Controller
 
         if ($items->isEmpty()) {
             return redirect()->route('keranjang.index')->with('error', 'Keranjang masih kosong.');
-        }    
+        }
+
+        if ($validated['pay_total'] < $items->sum('total_harga')) {
+            return redirect()->back()->with('error', 'Jumlah pembayaran belum cukup.');
+        }
 
         $transaksi = Transaksi::create([
             'total_harga' => $items->sum('total_harga'),
+            'total_bayar' => $validated['pay_total'],
         ]);
 
         foreach ($items as $item) {

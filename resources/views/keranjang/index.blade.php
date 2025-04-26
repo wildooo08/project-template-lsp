@@ -115,12 +115,22 @@
 
                     <form action="{{ route('keranjang.checkout') }}" method="POST">
                         @csrf
+                        <label for="pay_total" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Jumlah
+                            Bayar</label>
+                        <input type="text" name="pay_total" id="pay_total" placeholder=""
+                            value="{{ old('pay_total') }}"
+                            class="w-full rounded gray-300 mb-2 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('pay_total') border-red-500 @enderror"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                        @error('pay_total')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+
                         <button type="submit"
                             class="px-4 py-2 rounded font-semibold text-white {{ count($items) === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700' }}"
                             {{ count($items) === 0 ? 'disabled' : '' }}>
                             Bayar
                         </button>
-                        @if(count($items) === 0)
+                        @if (count($items) === 0)
                             <p class="text-sm text-red-500 mt-2">Keranjang anda masih kosong!</p>
                         @endif
                     </form>
