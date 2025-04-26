@@ -10,54 +10,57 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama</label>
-                    <input type="text" name="name" id="name" autofocus value="{{ old('name') }}"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('name') border-red-500 @enderror">
-                    @error('name')
+                    <label for="nama_produk" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
+                        Produk</label>
+                    <input type="text" name="nama_produk" id="nama_produk" autofocus value="{{ old('nama_produk') }}"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('nama_produk') border-red-500 @enderror">
+                    @error('nama_produk')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="category_id"
+                    <label for="kategori_id"
                         class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Kategori</label>
-                    <select name="category_id" id="category_id"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('category_id') border-red-500 @enderror">
+                    <select name="kategori_id" id="kategori_id"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('kategori_id') border-red-500 @enderror">
                         <option value="">Pilih Kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}"
+                                {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>
+                                {{ $kategori->nama_kategori }}
                             </option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('kategori_id')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="price"
+                    <label for="harga"
                         class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Harga</label>
-                    <input type="text" name="price" id="price" value="{{ old('price') }}"
-                        placeholder="Masukkan harga (contoh: 15000)"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('price') border-red-500 @enderror"
+                    <input type="text" name="harga" id="harga" value="{{ old('harga') }}"
+                        placeholder="Masukkan harga (contoh: 15000 atau 15000.50)"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('harga') border-red-500 @enderror"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
-                    @error('price')
+                    @error('harga')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="stock" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Stok</label>
-                    <input type="text" name="stock" id="stock" placeholder="Masukkan jumlah stok"
-                        value="{{ old('stock') }}"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('stock') border-red-500 @enderror"
+                    <label for="kuantitas"
+                        class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Stok</label>
+                    <input type="text" name="kuantitas" id="kuantitas" placeholder="Masukkan jumlah stok"
+                        value="{{ old('kuantitas') }}"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('kuantitas') border-red-500 @enderror"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-                    @error('stock')
+                    @error('kuantitas')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
 
                 <div class="flex justify-end space-x-3">
                     <a href="{{ route('produk.index') }}"
