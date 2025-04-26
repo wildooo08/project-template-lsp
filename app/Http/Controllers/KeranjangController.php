@@ -37,7 +37,7 @@ class KeranjangController extends Controller
 
         if ($items->isEmpty()) {
             return redirect()->route('keranjang.index')->with('error', 'Keranjang masih kosong.');
-        }
+        }    
 
         $transaksi = Transaksi::create([
             'total_harga' => $items->sum('total_harga'),
@@ -103,11 +103,11 @@ class KeranjangController extends Controller
         if ($item) {
             $item->jumlah += $validated['jumlah'];
             $item->save();
-            return redirect()->route('keranjang.index')->with('success', 'Item berhasil dimasukkan.');
+            return redirect()->route('keranjang.index')->with('success', 'Produk berhasil ditambahkan.');
         }
 
         ItemKeranjang::create($validated);
-        return redirect()->route('keranjang.index')->with('success', 'Item berhasil dimasukkan.');
+        return redirect()->route('keranjang.index')->with('success', 'Produk berhasil dimasukkan.');
     }
 
     /**
@@ -116,6 +116,6 @@ class KeranjangController extends Controller
     public function destroy(ItemKeranjang $item)
     {
         $item->delete();
-        return redirect()->route('keranjang.index')->with('success', 'Item berhasil dihapus.');
+        return redirect()->route('keranjang.index')->with('success', 'Item keranjang berhasil dihapus.');
     }
 }
