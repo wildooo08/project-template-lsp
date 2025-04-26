@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -70,5 +71,13 @@ class TransaksiController extends Controller
     {
         $transaksi->delete();
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
+    }
+
+    public function print(Transaksi $transaksi)
+    {
+        $transaksi->load(['items.produk']);
+
+        $pdf = Pdf::loadView('transaksi.receipt', compact('transaksi'));
+        return $pdf->download('receipt.pdf');
     }
 }

@@ -6,6 +6,11 @@
     </x-slot>
 
     <div class="py-12 max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <a href="{{ route('transaksi.print', $transaksi) }}"
+            class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">
+            Ekspor PDF
+        </a>
+
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Transaksi pada
                 {{ $transaksi->created_at }}</h3>
