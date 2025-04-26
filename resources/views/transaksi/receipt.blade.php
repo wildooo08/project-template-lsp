@@ -71,19 +71,19 @@
                             @endforelse
                             <tr>
                                 <td
-                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    class="px-6 py-4 border-t font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                     Total
                                 </td>
                                 <td
-                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    class="px-6 py-4 border-t font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                     -
                                 </td>
                                 <td
-                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    class="px-6 py-4 border-t font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                     -
                                 </td>
                                 <td
-                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    class="px-6 py-4 border-t font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                     Rp {{ number_format($transaksi->total_harga, 0, ',', '.') }}
                                 </td>
                             </tr>
@@ -105,14 +105,28 @@
                                     Rp {{ number_format($transaksi->total_bayar, 0, ',', '.') }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td
+                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    Kembalian
+                                </td>
+                                <td
+                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    -
+                                </td>
+                                <td
+                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    -
+                                </td>
+                                <td
+                                    class="px-6 py-4 font-bold whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                    Rp
+                                    {{ number_format($transaksi->total_bayar - $transaksi->total_harga, 0, ',', '.') }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <a href="{{ route('transaksi.index') }}"
-                    class="inline-block mt-6 px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded font-semibold">
-                    Kembali ke History Transaksi
-                </a>
             </div>
         </main>
     </div>
