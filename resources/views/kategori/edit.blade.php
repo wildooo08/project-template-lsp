@@ -6,17 +6,17 @@
     </x-slot>
     <div class="py-12 max-w-lg mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <form action="{{ route('kategori.update', $kategori) }}" method="POST">
+            <form action="{{ route('kategori.update', $category) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-4">
-                    <label for="nama_kategori" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
+                    <label for="name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Nama
                         Kategori</label>
-                    <input type="text" name="nama_kategori" id="nama_kategori" required autofocus
-                        value="{{ old('nama_kategori', $kategori->nama_kategori) }}"
-                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('nama_kategori') border-red-500 @enderror">
-                    @error('nama_kategori')
+                    <input type="text" name="name" id="name" required autofocus
+                        value="{{ old('name', $category->name) }}"
+                        class="w-full rounded gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 @error('name') border-red-500 @enderror">
+                    @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
