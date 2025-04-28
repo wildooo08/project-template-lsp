@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Transaksi;
+use App\Models\Kategori;
 
 class DashboardController extends Controller
 {
@@ -16,8 +17,9 @@ class DashboardController extends Controller
         $jumlahTransaksi = Transaksi::count();
         $totalPendapatan = Transaksi::sum('total_harga');
         $totalStok = Produk::sum('kuantitas');
+        $jumlahKategori = Kategori::count();
 
-        return view('dashboard', compact('jumlahTransaksi', 'totalPendapatan', 'totalStok'));
+        return view('dashboard', compact('jumlahTransaksi', 'totalPendapatan', 'totalStok', 'jumlahKategori'));
     }
 
     /**
